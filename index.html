@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/fabric.min.js"></script>
+    <script src="./lib/FileSaver.min.js"></script>
+    <title>Projet Stage 1A </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<header><h1>Projet de stage canvas javascript</h1></header>
+<body>
+    <canvas id="canvas" width="1280" height="600"></canvas>
+    <button id="button_left">Gauche</button>
+    <button id="button_right">Droite</button>
+    <button id="clear" onclick="clearCanvas(canvas, svgState)">Tout Effacer</button>
+    <button id="restore" onclick="restoreCanvas(canvas, svgState)">Restaurer</button>
+    <input id="addImg" type="file" accept="image/*">
+
+    <button  onclick="toJSON()">toJSON</button>
+    <button id='loadJson2Canvas'>loadJson2Canvas</button>
+    <button type="button" onclick="downloadImage()">to Image</button>
+    <button type="button" onclick="downloadSVG()">toSVG</button>
+    <button class="btn btn-object-action" id="remove-selected"
+    onclick="removeSelected(svgState)">
+    Supprimer sélection
+    <button type="button" onclick="addText()">Ajouter du texte</button>
+  </button>
+    
+    
+    <script src="index.js"></script>
+
+</body>
+<footer>
+
+    
+</footer>
+</html>
