@@ -5,34 +5,67 @@
     <script src="./lib/jquery.min.js"></script>
     <script src="./lib/fabric.min.js"></script>
     <script src="./lib/FileSaver.min.js"></script>
+    <script src="https://kit.fontawesome.com/643dfdb75f.js" crossorigin="anonymous"></script>
     <title>Projet Stage 1A </title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <header><h1>Projet de stage canvas javascript</h1></header>
 <body>
-    <canvas id="canvas" width="1280" height="600"></canvas>
-    <button id="button_left">Gauche</button>
-    <button id="button_right">Droite</button>
-    <button id="clear" onclick="clearCanvas(canvas, svgState)">Tout Effacer</button>
-    <button id="restore" onclick="restoreCanvas(canvas, svgState)">Restaurer</button>
-    <input id="addImg" type="file" accept="image/*">
-
-    <button  onclick="toJSON()">toJSON</button>
-    <button id='loadJson2Canvas'>loadJson2Canvas</button>
-    <button type="button" onclick="downloadImage()">to Image</button>
-    <button type="button" onclick="downloadSVG()">toSVG</button>
-    <button class="btn btn-object-action" id="remove-selected"
-    onclick="removeSelected(svgState)">
-    Supprimer sélection
-    <button type="button" onclick="addText()">Ajouter du texte</button>
-  </button>
-    
-    
-    <script src="index.js"></script>
-
-</body>
-<footer>
-
-    
+    <div>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="button_container">
+<!--         <button id="button_left">Gauche</button>
+        <button id="button_right">Droite</button> -->
+        <button id="restore" onclick="restoreCanvas(canvas, svgState)"><span class="material-icons">
+            undo
+        </span></button>
+        
+        <button id="remove-selected" onclick="removeSelected(svgState)"><span class="material-icons">
+                    clear
+                </span>
+                </button>
+                
+            <button onclick="document.getElementById('addImg').click()"><span class="material-icons">
+                file_upload
+                </span></button>
+                <input id="addImg" type="file" accept="image/*" style="display:none">
+                
+                <!--             <select><span class="material-icons" onchange="changeFunc(value)">file_download</span>
+                    <option value="JSON">JSON</option>
+                    <option value="Image">IMAGE</option>
+                    <option value="SVN">SVN</option>
+                </select> -->
+            
+                <button  onclick="toJSON()" ><span class="material-icons">
+                    file_download
+                </span>AS JSON</button>
+                <button type="button" onclick="downloadImage()"><span class="material-icons">
+                    file_download
+                </span>AS IMG</button>
+                <button type="button" onclick="downloadSVG()"><span class="material-icons">
+                    file_download
+                </span>AS SVG</button>
+                
+                <button type="button" onclick="addText()"><span class="material-icons">
+                    text_fields
+                </span></button>
+                <button type="button" id="applyFilter"><span class="material-icons">
+                    gradient
+                </span></button>
+                <button id="clear" onclick="clearCanvas(canvas, svgState)"><span class="material-icons">
+                    delete
+                    </span></button>
+            </div>
+        
+            
+            <script src="index.js"></script>
+            
+        </body>
+        <footer>
+            
+            
 </footer>
 </html>

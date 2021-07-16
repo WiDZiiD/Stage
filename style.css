@@ -1,7 +1,14 @@
 #canvas{
     background-color: whitesmoke;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
+
+.canvas-container{
+    margin:0 auto;
+}
+
+
 
 header h1{
     font-size: 32px;
@@ -17,7 +24,29 @@ header h1{
 body{
     background-color: lightgray;
 }
-button{
-    margin:30px;
-}
+button, select {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.65);
+    background:#333333;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin: 4px;
+    margin-top:10px;
+  }
 
+button:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px #000;
+  }
+
+  .material-icons{
+      font-size: 36px;
+  }
+
+  #button_container{
+      text-align: center;
+  }

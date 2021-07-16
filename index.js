@@ -1,7 +1,25 @@
 
 
 var canvas = new fabric.Canvas('canvas');
-        
+
+function sizeCanvas()
+{
+  var width  = Math.max(document.documentElement.clientWidth,  window.innerWidth  || 0);
+  var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  canvas.setHeight( height - 200)
+  canvas.setWidth( width - 200 )
+}
+
+window.addEventListener('resize', draw, false);
+
+function draw()
+{  
+  canvas.renderAll();  
+}
+
+sizeCanvas();
+
+
 
         var rect = new fabric.Rect({
             top : 100,
@@ -120,7 +138,7 @@ var canvas = new fabric.Canvas('canvas');
           });
           const link = document.createElement("a");
           link.href = base64;
-          link.download = `eraser_example.${ext}`;
+          link.download = `maquette.${ext}`;
           link.click();
         };
 
@@ -130,7 +148,7 @@ var canvas = new fabric.Canvas('canvas');
           const blob = new Blob([svg], { type: "image/svg+xml" });
           const blobURL = URL.createObjectURL(blob);
           a.href = blobURL;
-          a.download = "eraser_example.svg";
+          a.download = "maquette.svg";
           a.click();
           URL.revokeObjectURL(blobURL);
         };
@@ -156,3 +174,24 @@ var canvas = new fabric.Canvas('canvas');
              fontSize: 45
           }));
        }
+
+
+       $("#button_right").click(function(){
+        rect.set({ left: rect.left + 10});
+        canvas.renderAll();
+        });
+
+        $("#applyFilter").click(function(){
+      
+          var obj = canvas.getActiveObject();
+      
+          obj.filters.push(new fabric.Image.filters.Grayscale());
+      
+          obj.applyFilters();
+      
+          canvas.renderAll();
+        });
+      
+        function changeFunc($i) {
+          alert($i);
+         }
