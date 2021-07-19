@@ -32,8 +32,12 @@
                 file_upload
                 </span></button>
                 <input id="addImg" type="file" accept="image/*" style="display:none">
-                
-                <!--             <select><span class="material-icons" onchange="changeFunc(value)">file_download</span>
+
+        <button onclick="document.getElementById('loadJson').click()"><span class="material-icons">
+                file_upload
+                </span></button>
+                <input id="loadJson" type="file" accept="application/JSON" style="display:none">        
+ <!--             <select><span class="material-icons" onchange="changeFunc(value)">file_download</span>
                     <option value="JSON">JSON</option>
                     <option value="Image">IMAGE</option>
                     <option value="SVN">SVN</option>
@@ -58,8 +62,107 @@
                 <button id="clear" onclick="clearCanvas(canvas, svgState)"><span class="material-icons">
                     delete
                     </span></button>
+                    
             </div>
-        
+
+
+
+                    <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>EDITER LE TEXTE</h2>
+            </div>
+            <div class="modal-body">
+                <div id="text-controls">
+                    <div>
+
+                        <label for="color" style="display:inline-block">Couleur du texte:</label>
+                        <input type="color" value="" id="text-color" size="10">
+                    </div>
+
+                        <label for="font-family" style="display:inline-block">Police:</label>
+                        <select id="font-family">
+                      <option value="arial">Arial</option>
+                      <option value="helvetica" selected>Helvetica</option>
+                      <option value="myriad pro">Myriad Pro</option>
+                      <option value="delicious">Delicious</option>
+                      <option value="verdana">Verdana</option>
+                      <option value="georgia">Georgia</option>
+                      <option value="courier">Courier</option>
+                      <option value="comic sans ms">Comic Sans MS</option>
+                      <option value="impact">Impact</option>
+                      <option value="monaco">Monaco</option>
+                      <option value="optima">Optima</option>
+                      <option value="hoefler text">Hoefler Text</option>
+                      <option value="plaster">Plaster</option>
+                      <option value="engagement">Engagement</option>
+                    </select>
+                    <br>
+                    <label for="text-align" style="display:inline-block">Alignement du texte:</label>
+                    <select id="text-align">
+                      <option value="left">Gauche</option>
+                      <option value="center">Centre</option>
+                      <option value="right">Droit</option>
+                      <option value="justify">Justifie</option>
+                    </select>
+                    <div>
+                      <label for="text-bg-color">Couleur de fond du bloc texte:</label>
+                      <input type="color" value="" id="text-bg-color" size="10">
+                    </div>
+                    <div>
+                      <label for="text-lines-bg-color">Couleur de fond du texte:</label>
+                      <input type="color" value="" id="text-lines-bg-color" size="10">
+                    </div>
+                    <div>
+                      <label for="text-stroke-color">Couleur du contour:</label>
+                      <input type="color" value="" id="text-stroke-color">
+                    </div>
+                    <div>
+
+                      <label for="text-stroke-width">Largeur du contour:</label>
+                      <input type="range" value="1" min="1" max="5" id="text-stroke-width">
+                    </div>
+                    <div>
+                      <label for="text-font-size">Taille de la police:</label>
+                      <input type="range" value="" min="1" max="120" step="1" id="text-font-size">
+                    </div>
+                    <div>
+                      <label for="text-line-height">Hauteur de ligne:</label>
+                      <input type="range" value="" min="0" max="10" step="0.1" id="text-line-height">
+                    </div>
+                  </div>
+                  <div id="text-controls-additional"></div>
+                    <input type='checkbox' name='fonttype' id="text-cmd-bold">
+                      Gras
+                  
+                    <input type='checkbox' name='fonttype' id="text-cmd-italic">
+                      Italique
+                   
+                    <input type='checkbox' name='fonttype' id="text-cmd-underline" >
+                      Souligné
+                    
+                    <input type='checkbox' name='fonttype'  id="text-cmd-linethrough">
+                      Barré
+                   
+                    <input type='checkbox' name='fonttype'  id="text-cmd-overline" >
+                      Surligné
+                    
+                  </div>
+            </div>
+            <div class="modal-footer">
+            <h3>Modal Footer</h3>
+            </div>
+        </div>
+
+        </div>
+                
             
             <script src="index.js"></script>
             

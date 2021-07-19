@@ -124,12 +124,27 @@ sizeCanvas();
           URL.revokeObjectURL(blobURL);
         };
 
-/*         canvas.loadFromJSON(JSON.parse(json_data), canvas.renderAll.bind(canvas), function(o, object) {
-          if (object.type == 'image') {
-            object.setSrc(url, canvas.renderAll.bind(canvas))
-          }
+
+        $("#loadJson2Canvas").click(function() {
+          canvas.loadFromJSON(
+            $("#myTextArea").val(),
+            canvas.renderAll.bind(canvas));
         });
- */
+        $('#loadJson').change(function(e) {
+          var file = e.target.files[0];
+          if(!file) return;
+          var reader = new FileReader();
+          reader.onload = function(f) {
+            var data = f.target.result;
+            canvas.loadFromJSON(
+            JSON.parse(data),
+            canvas.renderAll.bind(canvas));
+          };
+          reader.readAsText(file);
+          });
+
+
+      
         const downloadImage = () => {
           const ext = "png";
           const base64 = canvas.toDataURL({
@@ -169,8 +184,6 @@ sizeCanvas();
              top: 100,
              fontFamily: 'helvetica',
              fill: '#000',
-/*              stroke: '#F0F0F0',
-             strokeWidth: 0.2, */
              fontSize: 45
           }));
        }
@@ -195,3 +208,128 @@ sizeCanvas();
         function changeFunc($i) {
           alert($i);
          }
+
+
+
+         // Partie modal pour la taille du texte police ajout etc
+
+         // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+var $ = function(id){return document.getElementById(id)};
+
+document.getElementById('text-color').onchange = function() {
+  canvas.getActiveObject().set({fill: this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('text-bg-color').onchange = function() {
+  canvas.getActiveObject().set({backgroundColor : this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('text-lines-bg-color').onchange = function() {
+  canvas.getActiveObject().set({textBackgroundColor : this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('text-stroke-color').onchange = function() {
+  canvas.getActiveObject().set({stroke: this.value});
+  canvas.renderAll();
+};	
+
+document.getElementById('text-stroke-width').onchange = function() {
+  canvas.getActiveObject().set({strokeWidth : this.value});
+  canvas.renderAll();
+};				
+
+document.getElementById('font-family').onchange = function() {
+  canvas.getActiveObject().set({fontFamily : this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('text-font-size').onchange = function() {
+  canvas.getActiveObject().set({fontSize : this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('text-line-height').onchange = function() {
+  canvas.getActiveObject().set({lineHeight : this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('text-align').onchange = function() {
+  canvas.getActiveObject().set({textAlign : this.value});
+  canvas.renderAll();
+};
+
+
+radios5 = document.getElementsByName("fonttype");  // wijzig naar button
+for(var i = 0, max = radios5.length; i < max; i++) {
+radios5[i].onclick = function() {
+  
+  if(document.getElementById(this.id).checked == true) {
+      if(this.id == "text-cmd-bold") {
+          canvas.getActiveObject().set("fontWeight", "bold");
+      }
+      if(this.id == "text-cmd-italic") {
+          canvas.getActiveObject().set("fontStyle", "italic");
+      }
+      if(this.id == "text-cmd-underline") {
+          canvas.getActiveObject().set({underline: true})
+      }
+if(this.id == "text-cmd-linethrough") {
+          canvas.getActiveObject().set({linethrough: true});
+      }
+if(this.id == "text-cmd-overline") {
+          canvas.getActiveObject().set({overline: true});
+      }
+      
+      
+      
+  } else {
+      if(this.id == "text-cmd-bold") {
+          canvas.getActiveObject().set("fontWeight", "");
+      }
+      if(this.id == "text-cmd-italic") {
+          canvas.getActiveObject().set("fontStyle", "");
+      }  
+      if(this.id == "text-cmd-underline") {
+          canvas.getActiveObject().set({underline: false});
+      }
+if(this.id == "text-cmd-linethrough") {
+          canvas.getActiveObject().set({linethrough: false});
+      }  
+      if(this.id == "text-cmd-overline") {
+          canvas.getActiveObject().set({overline: false});
+      }
+  }
+  
+  
+  canvas.renderAll();
+}
+}
