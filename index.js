@@ -204,6 +204,19 @@ sizeCanvas();
       
           canvas.renderAll();
         });
+
+        $("#sepiaFilter").click(function(){
+      
+          var obj = canvas.getActiveObject();
+      
+          obj.filters.push(new fabric.Image.filters.Sepia());
+      
+          obj.applyFilters();
+      
+          canvas.renderAll();
+        });
+
+
       
         function changeFunc($i) {
           alert($i);
@@ -263,7 +276,7 @@ document.getElementById('text-stroke-color').onchange = function() {
 };	
 
 document.getElementById('text-stroke-width').onchange = function() {
-  canvas.getActiveObject().set({strokeWidth : this.value});
+  canvas.getActiveObject().set({strokeWidth : parseInt(this.value)});
   canvas.renderAll();
 };				
 
@@ -287,8 +300,46 @@ document.getElementById('text-align').onchange = function() {
   canvas.renderAll();
 };
 
+// Partie objet
 
-radios5 = document.getElementsByName("fonttype");  // wijzig naar button
+document.getElementById('angle').onchange = function() {
+  canvas.getActiveObject().set({angle : this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('object-stroke-color').onchange = function() {
+  canvas.getActiveObject().set({stroke: this.value});
+  canvas.renderAll();
+};	
+
+document.getElementById('object-stroke-width').onchange = function() {
+  canvas.getActiveObject().set({strokeWidth : parseInt(this.value)});
+  //parseInt ou sinon ça bug ??
+  canvas.renderAll();
+};				
+
+document.getElementById('cel_height').onchange = function() {
+  canvas.getActiveObject().set({height: parseInt(this.value)});
+  canvas.renderAll();
+};	
+
+document.getElementById('cel_width').onchange = function() {
+  canvas.getActiveObject().set({width: parseInt(this.value)});
+  canvas.renderAll();
+};	
+
+document.getElementById('cel_pos_x').onchange = function() {
+  canvas.getActiveObject().set({left: parseInt(this.value)});
+  canvas.renderAll();
+};	
+
+document.getElementById('cel_pos_y').onchange = function() {
+  canvas.getActiveObject().set({top: parseInt(this.value)});
+  canvas.renderAll();
+};	
+
+
+radios5 = document.getElementsByName("fonttype");  
 for(var i = 0, max = radios5.length; i < max; i++) {
 radios5[i].onclick = function() {
   
@@ -333,3 +384,5 @@ if(this.id == "text-cmd-linethrough") {
   canvas.renderAll();
 }
 }
+
+
