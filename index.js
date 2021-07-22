@@ -188,7 +188,36 @@ sizeCanvas();
           }));
        }
 
-
+       
+       function downloadcanvas(Selectedvalue){
+          switch (Selectedvalue){
+            case 'JSON':
+              toJSON();
+              break;
+            case 'SVG':
+              downloadSVG();
+              break;
+            case 'PNG':
+              downloadImage();
+              break;
+          }
+        }
+          
+          
+          
+/*           
+          (this.value = "JSON"){
+            toJSON();
+          }
+          if (this.value = "PNG"){
+            downloadImage();
+          }
+          if (this.value = "SVG"){
+            downloadSVG();
+          }
+          return 0
+       }
+ */
        $("#button_right").click(function(){
         rect.set({ left: rect.left + 10});
         canvas.renderAll();
@@ -217,12 +246,6 @@ sizeCanvas();
         });
 
 
-      
-        function changeFunc($i) {
-          alert($i);
-         }
-
-
 
          // Partie modal pour la taille du texte police ajout etc
 
@@ -231,13 +254,25 @@ var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
+var btn2 = document.getElementById("myBtn2");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+var texteditarea = document.getElementById("text-controls");
+var celarea = document.getElementById("selection-control");
+
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
   modal.style.display = "block";
+  celarea.style.display = "none";
+  texteditarea.style.display ="contents";
+}
+btn2.onclick = function() {
+  modal.style.display = "block";
+  texteditarea.style.display = "none";
+  celarea.style.display ="contents";
+  
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -386,3 +421,24 @@ if(this.id == "text-cmd-linethrough") {
 }
 
 
+
+    const rangeInputs = document.querySelectorAll('input[type="range"]')
+const numberInput = document.querySelector('input[type="number"]')
+
+function handleInputChange(e) {
+  let target = e.target
+  if (e.target.type !== 'range') {
+    target = document.getElementById('range')
+  } 
+  const min = target.min
+  const max = target.max
+  const val = target.value
+  
+  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+}
+
+rangeInputs.forEach(input => {
+  input.addEventListener('input', handleInputChange)
+})
+
+numberInput.addEventListener('input', handleInputChange)
