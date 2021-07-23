@@ -217,11 +217,11 @@ sizeCanvas();
           }
           return 0
        }
- */
-       $("#button_right").click(function(){
+
+      $("#button_right").click(function(){
         rect.set({ left: rect.left + 10});
         canvas.renderAll();
-        });
+        }); */
 
         $("#applyFilter").click(function(){
       
@@ -255,23 +255,33 @@ var modal = document.getElementById("myModal");
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 var btn2 = document.getElementById("myBtn2");
+var btn3 = document.getElementById("myBtn3");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 var texteditarea = document.getElementById("text-controls");
 var celarea = document.getElementById("selection-control");
+var canvasarea = document.getElementById("canvas-control");
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
   modal.style.display = "block";
   celarea.style.display = "none";
+  canvasarea.style.display = "none"
   texteditarea.style.display ="contents";
 }
 btn2.onclick = function() {
   modal.style.display = "block";
   texteditarea.style.display = "none";
+  canvasarea.style.display = "none"
   celarea.style.display ="contents";
+  
+}
+btn3.onclick = function() {
+  modal.style.display = "block";
+  texteditarea.style.display = "none";
+  celarea.style.display ="none";
+  canvasarea.style.display = "contents"
   
 }
 
@@ -372,6 +382,41 @@ document.getElementById('cel_pos_y').onchange = function() {
   canvas.getActiveObject().set({top: parseInt(this.value)});
   canvas.renderAll();
 };	
+
+// partie canvas
+
+document.getElementById('backgroundcolor').onchange = function() {
+  canvas.set({backgroundColor: this.value});
+  canvas.renderAll();
+};
+
+document.getElementById('canvasHeight').onchange = function() {
+  canvas.setHeight(this.value);
+  canvas.renderAll();
+};
+
+document.getElementById('canvasWidth').onchange = function() {
+  canvas.setWidth(this.value);
+  canvas.renderAll();
+};
+  const imgBackground = (e) => {
+    const inputbackgroundimage = document.getElementById('backgroundimage')
+    const file2 = inputbackgroundimage.files[0];
+    reader2.readAsDataURL(file2)
+}
+const inputbackground = document.getElementById('backgroundimage');
+inputbackground.addEventListener('change', imgBackground)
+const reader2 = new FileReader()
+
+reader2.addEventListener("load", () => {
+    fabric.Image.fromURL(reader2.result, img2 => {
+      canvas.setBackgroundImage(img2, canvas.renderAll.bind(canvas), {
+        scaleX: canvas.width / img2.width,
+        scaleY: canvas.height / img2.height
+     });
+})
+})
+
 
 
 radios5 = document.getElementsByName("fonttype");  

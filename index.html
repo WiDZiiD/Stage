@@ -113,6 +113,7 @@
                     </span></button>
                     <button id="myBtn">Text Editor</button>
                     <button id="myBtn2">Cel Editor</button>
+                    <button id="myBtn3">Canvas Editor</button>
                     
             </div>
 
@@ -136,32 +137,36 @@
                         <label for="color" style="display:inline-block">Couleur du texte:</label>
                         <input type="color"  id="text-color" size="10">
                     </div>
+                    <div>
 
                         <label for="font-family" style="display:inline-block">Police:</label>
                         <select id="font-family">
-                      <option value="arial">Arial</option>
-                      <option value="helvetica" selected>Helvetica</option>
-                      <option value="myriad pro">Myriad Pro</option>
-                      <option value="delicious">Delicious</option>
-                      <option value="verdana">Verdana</option>
-                      <option value="georgia">Georgia</option>
-                      <option value="courier">Courier</option>
-                      <option value="comic sans ms">Comic Sans MS</option>
-                      <option value="impact">Impact</option>
-                      <option value="monaco">Monaco</option>
-                      <option value="optima">Optima</option>
-                      <option value="hoefler text">Hoefler Text</option>
-                      <option value="plaster">Plaster</option>
-                      <option value="engagement">Engagement</option>
-                    </select>
-                    <br>
-                    <label for="text-align" style="display:inline-block">Alignement du texte:</label>
-                    <select id="text-align">
-                      <option value="left">Gauche</option>
-                      <option value="center">Centre</option>
-                      <option value="right">Droit</option>
-                      <option value="justify">Justifie</option>
-                    </select>
+                            <option value="arial">Arial</option>
+                            <option value="helvetica" selected>Helvetica</option>
+                            <option value="myriad pro">Myriad Pro</option>
+                            <option value="delicious">Delicious</option>
+                            <option value="verdana">Verdana</option>
+                            <option value="georgia">Georgia</option>
+                            <option value="courier">Courier</option>
+                            <option value="comic sans ms">Comic Sans MS</option>
+                            <option value="impact">Impact</option>
+                            <option value="monaco">Monaco</option>
+                            <option value="optima">Optima</option>
+                            <option value="hoefler text">Hoefler Text</option>
+                            <option value="plaster">Plaster</option>
+                            <option value="engagement">Engagement</option>
+                        </select>
+                        <br>
+                    </div>
+                    <div>
+                        <label for="text-align" style="display:inline-block">Alignement du texte:</label>
+                        <select id="text-align">
+                            <option value="left">Gauche</option>
+                            <option value="center">Centre</option>
+                            <option value="right">Droit</option>
+                            <option value="justify">Justifie</option>
+                        </select>
+                    </div>
                     <div>
                       <label for="text-bg-color">Couleur de fond du bloc texte:</label>
                       <input type="color"  id="text-bg-color" size="10">
@@ -210,14 +215,12 @@
                   <div id="selection-control">
                     <h2> Controle Objet</h2>
                     <div>
-                      <p>Format cellule hauteur/largeur</p>
                       <label for="cel_height">Hauteur:</label>
                       <input type="number" id="cel_height">
                       <label for="cel_width">Largeur:</label>
                       <input type="number" id="cel_width">
                     </div>
                     <div>
-                      <p> position x y</p>
                       <label for="cel_pos_x">Coordonnées en x:</label>
                       <input type="number" id="cel_pos_x">
                       <label for="cel_pos_y">Coordonnées en y:</label>
@@ -234,6 +237,26 @@
                     <div>
                       <label for="object-stroke-width">Largeur du contour:</label>
                       <input type="range" value="0" min="0" max="15" step="1" id="object-stroke-width">
+                    </div>
+
+                  </div>
+                  <div id="canvas-control">
+                    <h2>Control canvas</h2>
+                    <div>
+                        <label for="backgroundcolor">Couleur de fond:</label>
+                        <input type="color"  id="backgroundcolor">
+                    </div>
+                    <div>
+                        <label for="backgroundimage">Image de fond:</label>
+                        <input type="file" id="backgroundimage" accept="image/*" style="display:none"  >
+                        <button onclick="document.getElementById('backgroundimage').click()">PNG</button>
+                    </div>
+                    <div>
+                        <label for="canvasHeight">Hauteur maquette:</label>
+                        <input type="number" id="canvasHeight">
+                        
+                        <label for="canvasWidth">Largeur maquette:</label>
+                        <input type="number" id="canvasWidth">
                     </div>
 
                   </div>
