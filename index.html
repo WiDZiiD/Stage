@@ -108,16 +108,25 @@
                 </span></button>
  -->
 
-                <button id="clear" onclick="clearCanvas(canvas, svgState)"><span class="material-icons">
-                    delete
-                    </span></button>
-                    <button id="myBtn">Text Editor</button>
-                    <button id="myBtn2">Cel Editor</button>
-                    <button id="myBtn3">Canvas Editor</button>
-                    
+ <!--                     <button id="myBtn">Text Editor</button>
+    <button id="myBtn2">Cel Editor</button>
+    <button id="myBtn3">Canvas Editor</button> -->
+    
+    <div class="dropdown">
+        <button><span class="material-icons">
+            mode_edit
+        </span></button>
+        <div class="dropdown-content">
+            <a id="myBtn3">Maquette</a>
+            <a id="myBtn2">Cellule</a>
+            <a id="myBtn">Texte</a>
+        </div>
+    </div>
+    
+    <button id="clear" onclick="clearCanvas(canvas, svgState)"><span class="material-icons">
+        delete
+        </span></button>
             </div>
-
-
 
                     <!-- Trigger/Open The Modal -->
 
@@ -213,18 +222,22 @@
                     </div>
                   </div>
                   <div id="selection-control">
-                    <h2> Controle Objet</h2>
+                    <h2> Controle cellule</h2>
                     <div>
                       <label for="cel_height">Hauteur:</label>
                       <input type="number" id="cel_height">
-                      <label for="cel_width">Largeur:</label>
-                      <input type="number" id="cel_width">
+                    </div>
+                    <div>
+                        <label for="cel_width">Largeur:</label>
+                        <input type="number" id="cel_width">
                     </div>
                     <div>
                       <label for="cel_pos_x">Coordonnées en x:</label>
                       <input type="number" id="cel_pos_x">
-                      <label for="cel_pos_y">Coordonnées en y:</label>
-                      <input type="number" id="cel_pos_y">
+                    </div>
+                    <div>
+                        <label for="cel_pos_y">Coordonnées en y:</label>
+                        <input type="number" id="cel_pos_y">
                     </div>
                     <div>
                       <label for="angle">Angle:</label>
@@ -238,6 +251,11 @@
                       <label for="object-stroke-width">Largeur du contour:</label>
                       <input type="range" value="0" min="0" max="15" step="1" id="object-stroke-width">
                     </div>
+                    <div>
+                        <label for="object-color">Couleur de la cellule:</label>
+                        <input type="color"  id="object-color">
+                    </div>
+
 
                   </div>
                   <div id="canvas-control">
@@ -258,6 +276,20 @@
                         <label for="canvasWidth">Largeur maquette:</label>
                         <input type="number" id="canvasWidth">
                     </div>
+                    <div>
+                        
+                        <button id="set-gradient">Set Gradient</button>
+                    </div>
+                        
+                    <div>
+                        <label for="gridsize">Taille de la grille:</label>
+                        <input id="gridsize" type="number" value="50"/>
+                    </div>
+                    <div>
+                        <button onclick='addGrid()'>Afficher grille</button>
+                        <button onclick='removeGrid()'>Supprimer grille</button>
+                    </div>
+                        
 
                   </div>
             </div>

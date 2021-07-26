@@ -2,11 +2,12 @@
 
 var canvas = new fabric.Canvas('canvas');
 
+// canvas qui s'adapte à la résolution de l'écran
 function sizeCanvas()
 {
   var width  = Math.max(document.documentElement.clientWidth,  window.innerWidth  || 0);
   var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  canvas.setHeight( height - 200)
+  canvas.setHeight( height - 170)
   canvas.setWidth( width - 200 )
 }
 
@@ -20,7 +21,7 @@ function draw()
 sizeCanvas();
 
 
-
+// rectangle de base présent
         var rect = new fabric.Rect({
             top : 100,
             left : 100,
@@ -66,8 +67,8 @@ sizeCanvas();
             });
         }
 
+        // Restore l'état précédent du canvas (ne fonctionne pas avec toutes les fonctions, valable uniquement pour une version précédente)
         const svgState = {}
-        
         const restoreCanvas = (canvas, state) => {
           if (state.val) {
               fabric.loadSVGFromString(state.val, objects => {
@@ -77,7 +78,6 @@ sizeCanvas();
               })
           }
       }
-      const bgUrl = ''
       
 
        /*  test evenement souris sur canvas
@@ -85,7 +85,7 @@ sizeCanvas();
             console.log(e)
         }) */
 
-
+        // Upload et ajoute une image au canvas 
         const imgAdded = (e) => {
             const inputElem = document.getElementById('addImg')
             const file = inputElem.files[0];
@@ -102,7 +102,7 @@ sizeCanvas();
             })
         })
 
-
+        // Génère et télécharge un fichier json à partir du canvas
         const toJSON = async () => {
           const json = canvas.toDatalessJSON(["clipPath"]);
           const out = JSON.stringify(json, null, "\t");
@@ -124,7 +124,7 @@ sizeCanvas();
           URL.revokeObjectURL(blobURL);
         };
 
-
+        // Charge un fichier JSON sur le canvas 
         $("#loadJson2Canvas").click(function() {
           canvas.loadFromJSON(
             $("#myTextArea").val(),
@@ -144,7 +144,7 @@ sizeCanvas();
           });
 
 
-      
+        // Récupère le canvas sous format PNG
         const downloadImage = () => {
           const ext = "png";
           const base64 = canvas.toDataURL({
@@ -157,6 +157,7 @@ sizeCanvas();
           link.click();
         };
 
+        //Recupère le canvas sous format SVG
         const downloadSVG = () => {
           const svg = canvas.toSVG();
           const a = document.createElement("a");
@@ -168,6 +169,7 @@ sizeCanvas();
           URL.revokeObjectURL(blobURL);
         };
 
+        // Supprime cellule active avec le bouton 'x'
         const removeSelected = (state) => {
           state.val = canvas.toSVG()
           var activeObjects = canvas.getActiveObjects();
@@ -177,7 +179,18 @@ sizeCanvas();
           }
         };
       
+        //Supprime cellule active avec touche delete
+        document.addEventListener('keydown', function(event)  {
+          var keyPressed = event.keyCode;
+          if(keyPressed == 46) {
+            var activeObject = canvas.getActiveObject();
+            if(activeObject !== null) {
+              canvas.remove(activeObject);
+            }
+          }
+        });
 
+        // Ajoute ce texte à l'appuie du bouton texte
         function addText() {
           canvas.add(new fabric.IText('Nouveau texte \nretour a la ligne', {
              left: 50,
@@ -188,7 +201,7 @@ sizeCanvas();
           }));
        }
 
-       
+       // Boutton avec dropup menu pour choix du format de téléchargement
        function downloadcanvas(Selectedvalue){
           switch (Selectedvalue){
             case 'JSON':
@@ -223,6 +236,7 @@ sizeCanvas();
         canvas.renderAll();
         }); */
 
+        //Filtre noir & blanc (échelle de gris plus précisément)
         $("#applyFilter").click(function(){
       
           var obj = canvas.getActiveObject();
@@ -233,7 +247,7 @@ sizeCanvas();
       
           canvas.renderAll();
         });
-
+        //Filtre Sépia
         $("#sepiaFilter").click(function(){
       
           var obj = canvas.getActiveObject();
@@ -249,21 +263,23 @@ sizeCanvas();
 
          // Partie modal pour la taille du texte police ajout etc
 
-         // Get the modal
+         // Récupère le modal
 var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
+// Récupères les boutons qui ouvrent le modal
 var btn = document.getElementById("myBtn");
 var btn2 = document.getElementById("myBtn2");
 var btn3 = document.getElementById("myBtn3");
 
-// Get the <span> element that closes the modal
+// Récupère la croix qui ferme le modal
 var span = document.getElementsByClassName("close")[0];
+
+//Récupère les différents contenues du modal
 var texteditarea = document.getElementById("text-controls");
 var celarea = document.getElementById("selection-control");
 var canvasarea = document.getElementById("canvas-control");
 
-// When the user clicks the button, open the modal 
+// Ouvre le modal au clic et affiche ou non les contenues nécéssaires
 btn.onclick = function() {
   modal.style.display = "block";
   celarea.style.display = "none";
@@ -285,7 +301,7 @@ btn3.onclick = function() {
   
 }
 
-// When the user clicks on <span> (x), close the modal
+// Ferme le modal au clic de la croix
 span.onclick = function() {
   modal.style.display = "none";
 }
@@ -300,6 +316,7 @@ window.onclick = function(event) {
 
 var $ = function(id){return document.getElementById(id)};
 
+// Récupère et applique tout les paramètres pour les textes
 document.getElementById('text-color').onchange = function() {
   canvas.getActiveObject().set({fill: this.value});
   canvas.renderAll();
@@ -345,7 +362,7 @@ document.getElementById('text-align').onchange = function() {
   canvas.renderAll();
 };
 
-// Partie objet
+// Partie cellules
 
 document.getElementById('angle').onchange = function() {
   canvas.getActiveObject().set({angle : this.value});
@@ -383,6 +400,11 @@ document.getElementById('cel_pos_y').onchange = function() {
   canvas.renderAll();
 };	
 
+document.getElementById('object-color').onchange = function() {
+  canvas.getActiveObject().set({fill: this.value});
+  canvas.renderAll();
+};	
+
 // partie canvas
 
 document.getElementById('backgroundcolor').onchange = function() {
@@ -399,6 +421,71 @@ document.getElementById('canvasWidth').onchange = function() {
   canvas.setWidth(this.value);
   canvas.renderAll();
 };
+
+
+// Applique un gradient générique au fond du canvas
+fabric.util.addListener(document.getElementById('set-gradient'), 'click', function () {
+    
+  var grad = new fabric.Gradient({
+      type: 'linear',
+      coords: {
+          x1: 0,
+      y1: 0,
+      x2: canvas.width,
+      y2: canvas.height,
+      },
+      colorStops: [
+      {
+          color: 'rgb(166,111,213)',
+          offset: 0,
+      },
+      {
+          color: 'rgba(106, 72, 215, 0.5)',
+          offset: 0.5,
+      },
+      {    
+          color: '#200772',
+          offset: 1,
+      }
+      ]});
+  canvas.backgroundColor = grad.toLive(canvas.contextContainer);
+      canvas.renderAll();
+  });
+
+  
+  // Génére et affiche une grille sur le canvas selon la taille de la variable grid
+  var gridGroup;
+
+  function addGrid() {
+    if (gridGroup) return;
+    var grid = document.getElementById('gridsize').value;
+    var gridoption = {
+      stroke: "#cccccc",
+
+    };
+    var gridLines = [];
+    for (var i = 0; i < (canvas.width / grid); i++) {
+      gridLines.push(new fabric.Line([ i * grid, 0, i * grid, canvas.height], gridoption));
+    }
+    for (var i = 0; i < (canvas.height / grid); i++){  
+      gridLines.push(new fabric.Line([ 0, i * grid, canvas.width, i * grid], gridoption));
+    }
+      
+
+    gridGroup = new fabric.Group(gridLines, {
+      selectable: false,
+      evented: false
+    })
+    gridGroup.addWithUpdate();
+    canvas.add(gridGroup);
+  }
+  
+  function removeGrid() {
+    gridGroup && canvas.remove(gridGroup);
+    gridGroup = null;
+  }
+
+// Upload une image comme fond du canvas
   const imgBackground = (e) => {
     const inputbackgroundimage = document.getElementById('backgroundimage')
     const file2 = inputbackgroundimage.files[0];
@@ -418,7 +505,7 @@ reader2.addEventListener("load", () => {
 })
 
 
-
+// Change les paramètres du texte si les cases sont cochées
 radios5 = document.getElementsByName("fonttype");  
 for(var i = 0, max = radios5.length; i < max; i++) {
 radios5[i].onclick = function() {
@@ -465,7 +552,7 @@ if(this.id == "text-cmd-linethrough") {
 }
 }
 
-
+/* 
 
     const rangeInputs = document.querySelectorAll('input[type="range"]')
 const numberInput = document.querySelector('input[type="number"]')
@@ -486,4 +573,4 @@ rangeInputs.forEach(input => {
   input.addEventListener('input', handleInputChange)
 })
 
-numberInput.addEventListener('input', handleInputChange)
+numberInput.addEventListener('input', handleInputChange) */
