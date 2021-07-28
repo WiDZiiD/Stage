@@ -25,8 +25,8 @@ sizeCanvas();
         var rect = new fabric.Rect({
             top : 100,
             left : 100,
-            width : 100,
-            height : 100,
+            width : fabric.util.parseUnit('50mm'),
+            height : fabric.util.parseUnit('50mm'),
             fill : 'red'
         });
 
@@ -60,10 +60,12 @@ sizeCanvas();
 // Effacer tous les objets du canvas
         const clearCanvas = (canvas, state) => {
             state.val = canvas.toSVG()
-            canvas.getObjects().forEach(element => {
-                if (element !== canvas.backgroundImage) {
-                    canvas.remove(element)
-                }  
+            canvas.getObjects().forEach(element => {         
+                    canvas.remove(element);
+                    canvas.setBackgroundImage(null);
+                    canvas.setBackgroundColor(null);
+                    canvas.backgroundColor = null;
+
             });
         }
 
@@ -195,7 +197,7 @@ sizeCanvas();
           canvas.add(new fabric.IText('Nouveau texte \nretour a la ligne', {
              left: 50,
              top: 100,
-             fontFamily: 'helvetica',
+             fontFamily: 'Barcode',
              fill: '#000',
              fontSize: 45
           }));
@@ -457,12 +459,13 @@ fabric.util.addListener(document.getElementById('set-gradient'), 'click', functi
   var gridGroup;
 
   function addGrid() {
-    if (gridGroup) return;
-    var grid = document.getElementById('gridsize').value;
+    if (gridGroup) removeGrid();
+    var grid = fabric.util.parseUnit(document.getElementById('gridsize').value.concat('mm'));
     var gridoption = {
       stroke: "#cccccc",
 
     };
+  
     var gridLines = [];
     for (var i = 0; i < (canvas.width / grid); i++) {
       gridLines.push(new fabric.Line([ i * grid, 0, i * grid, canvas.height], gridoption));
@@ -479,6 +482,10 @@ fabric.util.addListener(document.getElementById('set-gradient'), 'click', functi
     gridGroup.addWithUpdate();
     canvas.add(gridGroup);
   }
+
+
+  
+  
   
   function removeGrid() {
     gridGroup && canvas.remove(gridGroup);
@@ -552,25 +559,65 @@ if(this.id == "text-cmd-linethrough") {
 }
 }
 
-/* 
 
-    const rangeInputs = document.querySelectorAll('input[type="range"]')
-const numberInput = document.querySelector('input[type="number"]')
-
-function handleInputChange(e) {
-  let target = e.target
-  if (e.target.type !== 'range') {
-    target = document.getElementById('range')
-  } 
-  const min = target.min
-  const max = target.max
-  const val = target.value
+function changeformat(format){
+  switch (format){
+    case 'A3':
+        canvas.setHeight(fabric.util.parseUnit('420mm'));
+        canvas.setWidth(fabric.util.parseUnit('297mm'));
+        canvas.renderAll();
+      break;
+    case 'A4':
+        canvas.setHeight(fabric.util.parseUnit('297mm'));
+        canvas.setWidth(fabric.util.parseUnit('210mm'));
+        canvas.renderAll();
+      break;
+    case 'A5':
+        canvas.setHeight(fabric.util.parseUnit('210mm'));
+        canvas.setWidth(fabric.util.parseUnit('148mm'));
+        canvas.renderAll();
+      break;
+    case '13x18':
+        canvas.setHeight(fabric.util.parseUnit('180mm'));
+        canvas.setWidth(fabric.util.parseUnit('130mm'));
+        canvas.renderAll();
+      break;
+    case '18x13':
+        canvas.setHeight(fabric.util.parseUnit('130mm'));
+        canvas.setWidth(fabric.util.parseUnit('180mm'));
+        canvas.renderAll();
+      break;
   
-  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+  }
 }
 
-rangeInputs.forEach(input => {
-  input.addEventListener('input', handleInputChange)
-})
 
-numberInput.addEventListener('input', handleInputChange) */
+function changeobjectformat(format){
+  switch (format){
+    case 'A3':
+      canvas.getActiveObject().set({height: fabric.util.parseUnit('420mm')});
+      canvas.getActiveObject().set({width: fabric.util.parseUnit('297mm')});
+      canvas.renderAll();
+      break;
+    case 'A4':
+      canvas.getActiveObject().set({height: fabric.util.parseUnit('297mm')});
+      canvas.getActiveObject().set({width: fabric.util.parseUnit('210mm')});
+      canvas.renderAll();
+      break;
+    case 'A5':
+      canvas.getActiveObject().set({height: fabric.util.parseUnit('210mm')});
+      canvas.getActiveObject().set({width: fabric.util.parseUnit('148mm')});
+      canvas.renderAll();
+      break;
+    case '13x18':
+      canvas.getActiveObject().set({height: fabric.util.parseUnit('180mm')});
+      canvas.getActiveObject().set({width: fabric.util.parseUnit('130mm')});
+      canvas.renderAll();
+      break;
+    case '18x13':
+      canvas.getActiveObject().set({height: fabric.util.parseUnit('130mm')});
+      canvas.getActiveObject().set({width: fabric.util.parseUnit('180mm')});
+      canvas.renderAll();
+      break;
+  }
+}
