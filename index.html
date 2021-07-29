@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <script src="./lib/jquery.min.js"></script>
     <script src="./lib/fabric.min.js"></script>
-    <script src="./lib/FileSaver.min.js"></script>
     <title>Projet Stage 1A </title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
@@ -92,9 +91,9 @@
                         groups
                     </span></button>
                     <div class="dropdown-content">
-                        <a onclick="" style="font-size: 95%;">Photo de groupe</a>
-                        <a onclick=""style="font-size: 90%;">Photo individuelle 2</a>
-                        <a onclick=""style="padding:1px;">Photo individuelle 1</a>
+                        <a id="photoGroupe" onclick="addphotogroupe()">Photo de groupe</a>
+                        <a id="photosolo2" onclick="addphotosolo2()">Photo individuelle 2</a>
+                        <a id="photosolo1" onclick="addphotosolo1()">Photo individuelle 1</a>
                     </div>
                 </div>
 

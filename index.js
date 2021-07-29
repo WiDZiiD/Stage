@@ -1,5 +1,5 @@
 
-
+// Initialisation du canvas
 var canvas = new fabric.Canvas('canvas');
 
 // canvas qui s'adapte à la résolution de l'écran
@@ -31,31 +31,7 @@ sizeCanvas();
         });
 
         canvas.add(rect);
-// Déplacer le rectangle à gauche avec le boutton
-        $("#button_right").click(function(){
-        rect.set({ left: rect.left + 10});
-        canvas.renderAll();
-        });
-// Déplacer le rectangle à gauche avec le boutton
-        $("#button_left").click(function(){
-        rect.set({ left: rect.left - 10});
-        canvas.renderAll();
-        });
 
-//Sauvegarder le canvas en format img
-/*
-        $("#save").click(function(){
-            $("#canvas").get(0).toBlob(function(blob){
-                saveAs(blob, "myIMG.png");
-            });
-        }); */
-/* 
-        fabric.Image.fromURL('img.png', function(img){
-            canvas.add(img);
-            
-            
-        }) 
- */
 
 // Effacer tous les objets du canvas
         const clearCanvas = (canvas, state) => {
@@ -82,10 +58,6 @@ sizeCanvas();
       }
       
 
-       /*  test evenement souris sur canvas
-       canvas.on('mouse:over', (e) => {
-            console.log(e)
-        }) */
 
         // Upload et ajoute une image au canvas 
         const imgAdded = (e) => {
@@ -185,12 +157,10 @@ sizeCanvas();
         document.addEventListener('keydown', function(event)  {
           var keyPressed = event.keyCode;
           if(keyPressed == 46) {
-            var activeObject = canvas.getActiveObject();
-            if(activeObject !== null) {
-              canvas.remove(activeObject);
+            removeSelected(event);
             }
           }
-        });
+        );
 
         // Ajoute ce texte à l'appuie du bouton texte
         function addText() {
@@ -219,27 +189,9 @@ sizeCanvas();
         }
           
           
-          
-/*           
-          (this.value = "JSON"){
-            toJSON();
-          }
-          if (this.value = "PNG"){
-            downloadImage();
-          }
-          if (this.value = "SVG"){
-            downloadSVG();
-          }
-          return 0
-       }
-
-      $("#button_right").click(function(){
-        rect.set({ left: rect.left + 10});
-        canvas.renderAll();
-        }); */
 
         //Filtre noir & blanc (échelle de gris plus précisément)
-        $("#applyFilter").click(function(){
+        $("#applyFilter").click(function GrayFilter(){
       
           var obj = canvas.getActiveObject();
       
@@ -249,8 +201,9 @@ sizeCanvas();
       
           canvas.renderAll();
         });
+
         //Filtre Sépia
-        $("#sepiaFilter").click(function(){
+        $("#sepiaFilter").click(function SepiaFilter(){
       
           var obj = canvas.getActiveObject();
       
@@ -508,7 +461,7 @@ fabric.util.addListener(document.getElementById('set-gradient'), 'click', functi
 
   
   
-  
+  // supprime la grille
   function removeGrid() {
     gridGroup && canvas.remove(gridGroup);
     gridGroup = null;
@@ -581,7 +534,7 @@ if(this.id == "text-cmd-linethrough") {
 }
 }
 
-
+// change le format du canvas selon les formats existants
 function changeformat(format){
   switch (format){
     case 'A3':
@@ -613,7 +566,7 @@ function changeformat(format){
   }
 }
 
-
+// De la même façon change le format de la celulle selon certain format
 function changeobjectformat(format){
   switch (format){
     case 'A3':
@@ -643,3 +596,29 @@ function changeobjectformat(format){
       break;
   }
 }
+
+// Fonction permettant d'ajouter une image de groupe et individuelle depuis url, idéalement source depuis la base de donnée.
+function addphotogroupe(){
+  fabric.Image.fromURL( 'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JvdXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80' , 
+    function (img) {
+       canvas.add(img);
+       canvas.renderAll();
+    }, {crossOrigin: 'Anonymous'} // Permet l'exportation
+ );}
+function addphotosolo1(){
+  fabric.Image.fromURL( 'https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg' , 
+    function (img) {
+       canvas.add(img);
+       canvas.renderAll();
+    }, {crossOrigin: 'Anonymous'} // Permet l'exportation
+ );}
+ function addphotosolo2(){
+  fabric.Image.fromURL( 'https://media.istockphoto.com/photos/young-african-woman-smiling-at-sunset-picture-id969233490?k=6&m=969233490&s=612x612&w=0&h=3UW-GHQ2CksIelqKk0UKgy_7qExPsn1g8B2Q0zzU1xo=' , 
+    function (img) {
+       canvas.add(img);
+       canvas.renderAll();
+    }, {crossOrigin: 'Anonymous'} // Permet l'exportation
+ );}
+
+
+
