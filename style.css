@@ -136,6 +136,9 @@ button:hover {
 #selection-control div{
     margin-top:15px;
 }
+#canvas-control div{
+    margin-top:15px;
+}
 
 #selection-control div:last-child{
     margin-bottom:15px;

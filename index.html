@@ -155,6 +155,7 @@
             <div class="modal-body">
                 <div id="text-controls">
                     <div>
+                        <label for="textsrc">Texte source:</label>
                         <select id="textsrc">
                             <option value="school">Etablissement</option>
                             <option value="firstname">Prénom</option>
@@ -174,10 +175,10 @@
                             <option value="arial" style="font-family: Arial;">Arial</option>
                             <option value="helvetica" style="font-family: Helvetica;">Helvetica</option>
                             <option value="myriad pro" style="font-family: Trebuchet MS;">Trebuchet</option>
-                            <option value="delicious">Delicious</option>
-                            <option value="verdana">Verdana</option>
-                            <option value="georgia">Georgia</option>
-                            <option value="courier">Courier</option>
+                            <option value="delicious" style="font-family: Delicious;">Delicious</option>
+                            <option value="verdana" style="font-family: verdana;">Verdana</option>
+                            <option value="georgia"style="font-family: Georgia">Georgia</option>
+                            <option value="courier" style="font-family:courier">Courier</option>
                             <option value="comic sans ms" style="font-family: Comic sans ms;">Comic Sans MS</option>
                             <option value="impact" style="font-family: Impact;">Impact</option>
                             <option value="Barcode" style="font-family: Barcode;">Code Barre</option>
@@ -268,7 +269,8 @@
                     </div>
                     <div>
                       <label for="angle">Angle:</label>
-                      <input type="range" value="0" min="0" max="360" step="90" id="angle">                  
+                      <input type="range" value="0" min="0" max="360" step="90" id="angle" oninput="rangevalue4.value=value">
+                      <output id="rangevalue4">0</output>                
                     </div>
                     <div>
                       <label for="object-stroke-color">Couleur du contour:</label>
@@ -276,7 +278,8 @@
                     </div>
                     <div>
                       <label for="object-stroke-width">Largeur du contour:</label>
-                      <input type="range" value="0" min="0" max="15" step="1" id="object-stroke-width">
+                      <input type="range" value="0" min="0" max="15" step="1" id="object-stroke-width" oninput="rangevalue5.value=value">
+                      <output id="rangevalue5">0</output>  
                     </div>
                     <div>
                         <label for="object-color">Couleur de la cellule:</label>
@@ -299,6 +302,13 @@
                         </select>
                     </div>
                     <div>
+                        <label for="canvasHeight">Hauteur maquette:</label>
+                        <input type="number" id="canvasHeight">
+                        
+                        <label for="canvasWidth">Largeur maquette:</label>
+                        <input type="number" id="canvasWidth">
+                    </div>
+                    <div>
                         <label for="backgroundcolor">Couleur de fond:</label>
                         <input type="color"  id="backgroundcolor">
                     </div>
@@ -306,13 +316,6 @@
                         <label for="backgroundimage">Image de fond:</label>
                         <input type="file" id="backgroundimage" accept="image/*" style="display:none"  >
                         <button onclick="document.getElementById('backgroundimage').click()">PNG</button>
-                    </div>
-                    <div>
-                        <label for="canvasHeight">Hauteur maquette:</label>
-                        <input type="number" id="canvasHeight">
-                        
-                        <label for="canvasWidth">Largeur maquette:</label>
-                        <input type="number" id="canvasWidth">
                     </div>
                     <div>
                         

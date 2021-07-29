@@ -69,7 +69,7 @@ sizeCanvas();
             });
         }
 
-        // Restore l'état précédent du canvas (ne fonctionne pas avec toutes les fonctions, valable uniquement pour une version précédente)
+        // Restore l'état précédent du canvas (ne fonctionne pas avec toutes les fonctions, ni tout les objets, valable uniquement pour une version précédente)
         const svgState = {}
         const restoreCanvas = (canvas, state) => {
           if (state.val) {
@@ -197,7 +197,7 @@ sizeCanvas();
           canvas.add(new fabric.IText('Nouveau texte \nretour a la ligne', {
              left: 50,
              top: 100,
-             fontFamily: 'Barcode',
+             fontFamily: 'Arial',
              fill: '#000',
              fontSize: 45
           }));
@@ -409,11 +409,27 @@ document.getElementById('object-color').onchange = function() {
 
 // partie canvas
 
-document.getElementById('backgroundcolor').onchange = function() {
-  canvas.set({backgroundColor: this.value});
+// Récupération du texte source, dans l'idéal il faudrait que le texte pioche dans une base de donnée
+document.getElementById('textsrc').onchange = function() {
+  switch (this.value){
+    case 'school':
+      canvas.getActiveObject().set({text : "Etablissement scolaire "});
+      break;
+    case 'firstname':
+      canvas.getActiveObject().set({text : "Prénom"});
+      break;
+    case 'surname':
+      canvas.getActiveObject().set({text : "Nom de famille"});
+      break;
+    case 'date':
+      canvas.getActiveObject().set({text : "Date ou année scolaire"});
+      break;
+    case 'classname':
+      canvas.getActiveObject().set({text : "Classe"});
+      break;
+  }
   canvas.renderAll();
 };
-
 document.getElementById('canvasHeight').onchange = function() {
   canvas.setHeight(this.value);
   canvas.renderAll();
@@ -423,6 +439,12 @@ document.getElementById('canvasWidth').onchange = function() {
   canvas.setWidth(this.value);
   canvas.renderAll();
 };
+
+document.getElementById('backgroundcolor').onchange = function() {
+  canvas.set({backgroundColor: this.value});
+  canvas.renderAll();
+};
+
 
 
 // Applique un gradient générique au fond du canvas
