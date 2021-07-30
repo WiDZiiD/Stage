@@ -211,11 +211,15 @@ input[type="number"] {
     cursor:pointer;
   }
   
-  .dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+      background-color: #ddd;
+}
   
-  .dropdown:hover .dropdown-content {display: block;}
-  
- #canvas-control button{
-width: 100px;
-padding:5px;
- }
+.dropdown:hover .dropdown-content {
+      display: block;
+}
+   
+#canvas-control button{
+    width: 100px;
+    padding:5px;
+}

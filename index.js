@@ -37,13 +37,9 @@ sizeCanvas();
         const clearCanvas = (canvas, state) => {
           if (confirm("Voulez vous effacez tous les éléments ?") == true){
             state.val = canvas.toSVG()
-            canvas.getObjects().forEach(element => {         
-                    canvas.remove(element);
-                    canvas.setBackgroundImage(null);
-                    canvas.setBackgroundColor(null);
-                    canvas.backgroundColor = null;
+            canvas.clear()
             
-            });
+            
          }
         }
 
