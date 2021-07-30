@@ -35,14 +35,16 @@ sizeCanvas();
 
 // Effacer tous les objets du canvas
         const clearCanvas = (canvas, state) => {
+          if (confirm("Voulez vous effacez tous les éléments ?") == true){
             state.val = canvas.toSVG()
             canvas.getObjects().forEach(element => {         
                     canvas.remove(element);
                     canvas.setBackgroundImage(null);
                     canvas.setBackgroundColor(null);
                     canvas.backgroundColor = null;
-
+            
             });
+         }
         }
 
         // Restore l'état précédent du canvas (ne fonctionne pas avec toutes les fonctions, ni tout les objets, valable uniquement pour une version précédente)
@@ -331,7 +333,7 @@ document.getElementById('object-stroke-color').onchange = function() {
 
 document.getElementById('object-stroke-width').onchange = function() {
   canvas.getActiveObject().set({strokeWidth : parseInt(this.value)});
-  //parseInt ou sinon ça bug ??
+  //parseInt car sinon la fonction ne réalise pas ce qui est attendu
   canvas.renderAll();
 };				
 
@@ -362,7 +364,7 @@ document.getElementById('object-color').onchange = function() {
 
 // partie canvas
 
-// Récupération du texte source, dans l'idéal il faudrait que le texte pioche dans une base de donnée
+// Récupération du texte source, dans l'idéal il faudrait que le texte provienne d'une base de donnée
 document.getElementById('textsrc').onchange = function() {
   switch (this.value){
     case 'school':
@@ -610,15 +612,12 @@ function addphotosolo1(){
     function (img) {
        canvas.add(img);
        canvas.renderAll();
-    }, {crossOrigin: 'Anonymous'} // Permet l'exportation
+    }, {crossOrigin: 'Anonymous'} 
  );}
  function addphotosolo2(){
   fabric.Image.fromURL( 'https://media.istockphoto.com/photos/young-african-woman-smiling-at-sunset-picture-id969233490?k=6&m=969233490&s=612x612&w=0&h=3UW-GHQ2CksIelqKk0UKgy_7qExPsn1g8B2Q0zzU1xo=' , 
     function (img) {
        canvas.add(img);
        canvas.renderAll();
-    }, {crossOrigin: 'Anonymous'} // Permet l'exportation
+    }, {crossOrigin: 'Anonymous'} 
  );}
-
-
-

@@ -10,14 +10,12 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<header><h1>Projet de stage canvas javascript</h1></header>
+<header><h1>Éditeur pour photographe</h1></header>
 <body>
     <div>
         <canvas id="canvas"></canvas>
     </div>
     <div id="button_container">
-<!--         <button id="button_left">Gauche</button>
-        <button id="button_right">Droite</button> -->
         <button id="restore" onclick="restoreCanvas(canvas, svgState)"><span class="material-icons">
             undo
         </span></button>
@@ -26,19 +24,11 @@
                     clear
                 </span>
                 </button>
-                
-<!--             Ancien bouton pour upload image et json avant regroupement avec updrop 
-    <button onclick="document.getElementById('addImg').click()"><span class="material-icons">
-                file_upload
-            </span></button>
-            
-                    <button onclick="document.getElementById('loadJson').click()"><span class="material-icons">
-                            file_upload
-                            </span></button> -->
+
                 <input id="addImg" type="file" accept="image/*" style="display:none">
                 <input id="loadJson" type="file" accept="application/JSON" style="display:none">      
 
-              <!-- Deuxième solution avec dropup menu -->  
+              <!--dropup menu -->  
                 <div class="dropdown">
                     <button><span class="material-icons">
                         file_download
@@ -60,32 +50,7 @@
                     </div>
                 </div>
 
-
-<!--  Première solution avec un select 
-
-                <button>
-                    <select id="downloadfile" onchange="downloadcanvas(this.value)">file_download
-                        <option value="JSON" >JSON</option>
-                        <option value="PNG">IMAGE</option>
-                        <option value="SVG">SVG</option>
-                    </select>
-                </button>
-                     -->
-
-                     
-                <!-- Ancien bouton avant regroupement en un bouton
-
-                    <button  onclick="toJSON()" ><span class="material-icons">
-                    file_download
-                </span>AS JSON</button>
-                <button type="button" onclick="downloadImage()"><span class="material-icons">
-                    file_download
-                </span>AS IMG</button>
-                <button type="button" onclick="downloadSVG()"><span class="material-icons">
-                    file_download
-                </span>AS SVG</button> -->
                 
-
                 <div class="dropdown">
                     <button><span class="material-icons">
                         groups
@@ -111,19 +76,7 @@
                         <a id="applyFilter">Noir & Blanc</a>
                     </div>
                 </div>
-<!-- Ancien bouton pour changement de filtre
-                <button type="button" id="applyFilter"><span class="material-icons">
-                    gradient
-                </span></button>
-                <button type="button" id="sepiaFilter"><span class="material-icons">
-                    gradient
-                </span></button>
- -->
 
- <!--                     <button id="myBtn">Text Editor</button>
-    <button id="myBtn2">Cel Editor</button>
-    <button id="myBtn3">Canvas Editor</button> -->
-    
     <div class="dropdown">
         <button><span class="material-icons">
             mode_edit
@@ -140,19 +93,21 @@
         </span></button>
             </div>
 
-                    <!-- Trigger/Open The Modal -->
+                    <!-- Ouvrir/Fermer le modal -->
 
-        <!-- The Modal -->
+        <!-- Le modal -->
         <div id="myModal" class="modal">
 
-        <!-- Modal content -->
+        <!-- Contenu du mondal -->
         <div class="modal-content">
             <div class="modal-header">
             <span class="close">&times;</span>
             <h2>MENU D'ÉDITION</h2>
             </div>
             <div class="modal-body">
+            <!-- Menu d'édition du texte -->
                 <div id="text-controls">
+                    <h2>Édition du texte</h2>
                     <div>
                         <label for="textsrc">Texte source:</label>
                         <select id="textsrc">
@@ -172,12 +127,11 @@
                         <label for="font-family" style="display:inline-block">Police:</label>
                         <select id="font-family">
                             <option value="arial" style="font-family: Arial;">Arial</option>
-                            <option value="helvetica" style="font-family: Helvetica;">Helvetica</option>
                             <option value="myriad pro" style="font-family: Trebuchet MS;">Trebuchet</option>
                             <option value="delicious" style="font-family: Delicious;">Delicious</option>
                             <option value="verdana" style="font-family: verdana;">Verdana</option>
                             <option value="georgia"style="font-family: Georgia">Georgia</option>
-                            <option value="courier" style="font-family:courier">Courier</option>
+                            <option value="courier" style="font-family: courier">Courier</option>
                             <option value="comic sans ms" style="font-family: Comic sans ms;">Comic Sans MS</option>
                             <option value="impact" style="font-family: Impact;">Impact</option>
                             <option value="Barcode" style="font-family: Barcode;">Code Barre</option>
@@ -194,11 +148,11 @@
                         </select>
                     </div>
                     <div>
-                      <label for="text-bg-color">Couleur de fond du bloc texte:</label>
+                      <label for="text-bg-color">Couleur de fond du texte:</label>
                       <input type="color"  id="text-bg-color" size="10">
                     </div>
                     <div>
-                      <label for="text-lines-bg-color">Couleur de fond du texte:</label>
+                      <label for="text-lines-bg-color">Couleur surlignage:</label>
                       <input type="color" id="text-lines-bg-color" size="10">
                     </div>
                     <div>
@@ -238,8 +192,9 @@
                         Surligné  
                     </div>
                   </div>
+                  <!-- Menu d'édition des cellules -->
                   <div id="selection-control">
-                    <h2> Controle cellule</h2>
+                    <h2> Édition cellules</h2>
                     <div>
                         <label for="cel_format">Format de la cellule:</label>
                         <select id="cel_format" onchange="changeobjectformat(this.value)">
@@ -268,7 +223,7 @@
                     </div>
                     <div>
                       <label for="angle">Angle:</label>
-                      <input type="range" value="0" min="0" max="360" step="90" id="angle" oninput="rangevalue4.value=value">
+                      <input type="range" value="0" min="0" max="360" step="90" id="angle" oninput="rangevalue4.value=value"> 
                       <output id="rangevalue4">0</output>                
                     </div>
                     <div>
@@ -285,10 +240,10 @@
                         <input type="color"  id="object-color">
                     </div>
 
-
+                    <!-- Menu d'édition canvas/maquette -->
                   </div>
                   <div id="canvas-control">
-                    <h2>Control canvas</h2>
+                    <h2>Édition de la maquette</h2>
                     <div>
                         <label for="canvasformat">Format de la maquette:</label>
                         <select id="canvasformat" onchange="changeformat(this.value)">
@@ -303,9 +258,10 @@
                     <div>
                         <label for="canvasHeight">Hauteur maquette:</label>
                         <input type="number" id="canvasHeight">
-                        
+                    <div>
                         <label for="canvasWidth">Largeur maquette:</label>
                         <input type="number" id="canvasWidth">
+                    </div> 
                     </div>
                     <div>
                         <label for="backgroundcolor">Couleur de fond:</label>
@@ -317,13 +273,13 @@
                         <button onclick="document.getElementById('backgroundimage').click()">PNG</button>
                     </div>
                     <div>
-                        
+                        <label for="set-gradient">Fond dégradé:</label>
                         <button id="set-gradient">Set Gradient</button>
                     </div>
                         
                     <div>
-                        <label for="gridsize">Taille de la grille:</label>
-                        <input id="gridsize" type="number" value="10" min="1" max="500"s/>
+                        <label for="gridsize" >Taille de la grille:</label>
+                        <input id="gridsize" type="number" value="10" min="1" max="500" onchange="removeGrid(),addGrid()"/>
                         mm
                     </div>
                     <div>
@@ -340,8 +296,5 @@
             <script src="index.js"></script>
             
         </body>
-        <footer>
-            
-            
-</footer>
+
 </html>
